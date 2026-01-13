@@ -1,0 +1,11 @@
+<% content_for :title, "New muscle group" %>
+
+<h1>New muscle group</h1>
+
+<%= render "form", muscle_group: @muscle_group %>
+
+<br>
+
+<div>
+  <%= link_to "Back to muscle groups", muscle_groups_path %>
+</div>

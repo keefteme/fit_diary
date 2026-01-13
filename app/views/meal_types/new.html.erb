@@ -1,0 +1,11 @@
+<% content_for :title, "New meal type" %>
+
+<h1>New meal type</h1>
+
+<%= render "form", meal_type: @meal_type %>
+
+<br>
+
+<div>
+  <%= link_to "Back to meal types", meal_types_path %>
+</div>

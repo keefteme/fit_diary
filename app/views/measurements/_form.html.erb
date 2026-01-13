@@ -1,0 +1,42 @@
+<%= form_with(model: measurement) do |form| %>
+  <% if measurement.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(measurement.errors.count, "error") %> prohibited this measurement from being saved:</h2>
+
+      <ul>
+        <% measurement.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :weight, style: "display: block" %>
+    <%= form.text_field :weight %>
+  </div>
+
+  <div>
+    <%= form.label :waist, style: "display: block" %>
+    <%= form.text_field :waist %>
+  </div>
+
+  <div>
+    <%= form.label :hip, style: "display: block" %>
+    <%= form.text_field :hip %>
+  </div>
+
+  <div>
+    <%= form.label :date_taken, style: "display: block" %>
+    <%= form.date_field :date_taken %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Muscle groups" %>
+
+<h1>Muscle groups</h1>
+
+<div id="muscle_groups">
+  <% @muscle_groups.each do |muscle_group| %>
+    <%= render muscle_group %>
+    <p>
+      <%= link_to "Show this muscle group", muscle_group %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New muscle group", new_muscle_group_path %>

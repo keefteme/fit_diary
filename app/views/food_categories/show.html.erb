@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @food_category %>
+
+<div>
+  <%= link_to "Edit this food category", edit_food_category_path(@food_category) %> |
+  <%= link_to "Back to food categories", food_categories_path %>
+
+  <%= button_to "Destroy this food category", @food_category, method: :delete %>
+</div>

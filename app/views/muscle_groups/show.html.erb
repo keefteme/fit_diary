@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @muscle_group %>
+
+<div>
+  <%= link_to "Edit this muscle group", edit_muscle_group_path(@muscle_group) %> |
+  <%= link_to "Back to muscle groups", muscle_groups_path %>
+
+  <%= button_to "Destroy this muscle group", @muscle_group, method: :delete %>
+</div>
