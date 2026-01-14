@@ -14,20 +14,47 @@
         <th>Ккал</th>
       </tr>
     </thead>
-    <tbody>
-      <% @food_entries.each do |food_entry| %>
-        <tr>
-          <td><%= food_entry.date_eaten.strftime("%d.%m") %></td>
-          <td>
+      <tbody>
+    <% @food_entries.each do |food_entry| %>
+      <tr>
+        <!-- 1. Дата -->
+        <td><%= food_entry.date_eaten&.strftime("%d.%m") %></td>
+        
+        <!-- 2. Тип приема пищи (Проверяем, есть ли он) -->
+        <td>
+          <% if food_entry.meal_type %>
             <span class="badge bg-warning text-dark border border-dark rounded-pill">
               <%= food_entry.meal_type.name %>
             </span>
-          </td>
-          <td class="fw-bold"><%= food_entry.product.name %></td>
-          <td><%= food_entry.weight_grams %> г</td>
-          <td><%= (food_entry.product.calories * food_entry.weight_grams / 100.0).round(0) %></td>
-        </tr>
-      <% end %>
-    </tbody>
+          <% else %>
+            <span class="text-muted">-</span>
+          <% end %>
+        </td>
+
+        <!-- 3. Название продукта (Безопасный вывод) -->
+        <td class="fw-bold">
+          <%= food_entry.product&.name || "Продукт удален" %>
+        </td>
+
+        <!-- 4. Вес -->
+        <td><%= food_entry.weight_grams %> г</td>
+
+        <!-- 5. Расчет калорий -->
+        <td>
+          <% if food_entry.product %>
+            <%= ((food_entry.product.calories || 0) * (food_entry.weight_grams || 0) / 100.0).round(0) %>
+          <% else %>
+            0
+          <% end %>
+        </td>
+        
+        <!-- Кнопки действий -->
+        <td>
+           <%= link_to "Показать", food_entry, class: "text-dark fw-bold me-2" %>
+           <%= link_to "Ред.", edit_food_entry_path(food_entry), class: "text-dark fw-bold" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
   </table>
 </div>

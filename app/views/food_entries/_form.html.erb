@@ -1,7 +1,7 @@
 <%= form_with(model: food_entry) do |form| %>
   <% if food_entry.errors.any? %>
-    <div style="color: red">
-      <h2>Ошибок: <%= food_entry.errors.count %> </h2>
+    <div class="alert alert-danger">
+      <h4>Ошибка сохранения:</h4>
       <ul>
         <% food_entry.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,31 +10,64 @@
     </div>
   <% end %>
 
-  <!-- Выбор продукта (вместо ввода ID) -->
+  <!-- 1. Основные данные записи -->
+  <div class="row mb-4">
+    <div class="col-md-6 mb-3">
+      <%= form.label :date_eaten, "Дата", class: "fw-bold mb-2" %>
+      <%= form.date_field :date_eaten, class: "form-control", value: Date.today %>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+      <%= form.label :meal_type_id, "Приём пищи", class: "fw-bold mb-2" %>
+      <%= form.collection_select :meal_type_id, MealType.all, :id, :name, {}, { class: "form-select" } %>
+    </div>
+  </div>
+
+  <div class="card p-4 mb-4" style="background: #fffef0; border: 2px dashed black;">
+    <h4 class="mb-3">🥪 Что именно съели?</h4>
+    
+    <!-- 2. Вложенная форма для ПРОДУКТА (fields_for) -->
+    <%= form.fields_for :product do |product_form| %>
+      
+      <div class="mb-3">
+        <%= product_form.label :name, "Название продукта", class: "fw-bold" %>
+        <%= product_form.text_field :name, class: "form-control", placeholder: "Например: Борщ домашний" %>
+      </div>
+
+      <div class="mb-3">
+        <%= product_form.label :food_category_id, "Категория", class: "fw-bold" %>
+        <!-- Категорию лучше оставить списком, чтобы база была чище -->
+        <%= product_form.collection_select :food_category_id, FoodCategory.all, :id, :name, {}, { class: "form-select" } %>
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-md-3 mb-2">
+          <%= product_form.label :calories, "Ккал (на 100г)", class: "small fw-bold" %>
+          <%= product_form.number_field :calories, class: "form-control" %>
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+          <%= product_form.label :proteins, "Белки (г)", class: "small fw-bold" %>
+          <%= product_form.number_field :proteins, step: 0.1, class: "form-control" %>
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+          <%= product_form.label :fats, "Жиры (г)", class: "small fw-bold" %>
+          <%= product_form.number_field :fats, step: 0.1, class: "form-control" %>
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+          <%= product_form.label :carbs, "Углеводы (г)", class: "small fw-bold" %>
+          <%= product_form.number_field :carbs, step: 0.1, class: "form-control" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 3. Вес порции -->
+  <div class="mb-4">
+    <%= form.label :weight_grams, "Вес порции (грамм)", class: "fw-bold mb-2" %>
+    <%= form.number_field :weight_grams, class: "form-control form-control-lg", placeholder: "200" %>
+  </div>
+
   <div>
-    <%= form.label :product_id, "Продукт", style: "display: block" %>
-    <%= form.collection_select :product_id, Product.all, :id, :name, prompt: "Выберите продукт..." %>
+    <%= form.submit "Добавить в дневник", class: "btn-primary w-100 py-3" %>
   </div>
-
-  <!-- Выбор приема пищи (вместо ввода ID) -->
-  <div>
-    <%= form.label :meal_type_id, "Прием пищи", style: "display: block" %>
-    <%= form.collection_select :meal_type_id, MealType.all, :id, :name, prompt: "Выберите прием пищи..." %>
-  </div>
-
-  <div>
-    <%= form.label :weight_grams, "Вес (граммы)", style: "display: block" %>
-    <%= form.number_field :weight_grams %>
-  </div>
-
-  <div>
-    <%= form.label :date_eaten, "Дата", style: "display: block" %>
-    <%= form.date_field :date_eaten %>
-  </div>
-
-  <br>
-    <div class="mt-4">
-    <%= form.submit "Сохранить запись", class: "btn-neo-primary w-100" %>
-  </div>
-
 <% end %>

@@ -3,8 +3,8 @@
 <%= render @food_entry %>
 
 <div>
-  <%= link_to "Edit this food entry", edit_food_entry_path(@food_entry) %> |
-  <%= link_to "Back to food entries", food_entries_path %>
+  <%= link_to "Изменить запись о приёме пищи", edit_food_entry_path(@food_entry) %> |
+  <%= link_to "Вернуться к записи приёма пищи", food_entries_path %>
 
-  <%= button_to "Destroy this food entry", @food_entry, method: :delete %>
+  <%= button_to "Удалить данную запись приёма пищи", @food_entry, method: :delete %>
 </div>

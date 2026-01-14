@@ -1,16 +1,44 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Workouts" %>
-
-<h1>Workouts</h1>
-
-<div id="workouts">
-  <% @workouts.each do |workout| %>
-    <%= render workout %>
-    <p>
-      <%= link_to "Show this workout", workout %>
-    </p>
-  <% end %>
+<div class="d-flex justify-content-between align-items-center mb-5">
+  <h1 class="display-5 fw-bold">🏋️ Мои тренировки</h1>
+  <%= link_to "Новая тренировка", new_workout_path, class: "btn btn-primary" %>
 </div>
 
-<%= link_to "New workout", new_workout_path %>
+<% if @workouts.empty? %>
+  <div class="text-center p-5 card bg-light">
+    <h3>Пока пусто...</h3>
+    <p>Самое время начать! Жми кнопку сверху.</p>
+  </div>
+<% else %>
+  <div class="row">
+    <% @workouts.each do |workout| %>
+      <div class="col-md-4 mb-4">
+        <!-- КАРТОЧКА ТРЕНИРОВКИ -->
+        <div class="card h-100 d-flex flex-column" style="background: white; transform: rotate(<%= [-1, 0, 1].sample %>deg);">
+          
+          <div class="card-header bg-warning border-bottom-2 border-dark">
+            <h5 class="card-title fw-bolder m-0 text-uppercase text-truncate">
+              <%= workout.title.presence || "Без названия" %>
+            </h5>
+            <small class="text-dark fw-bold opacity-75">
+              <%= workout.date_performed.strftime("%d %B %Y") %>
+            </small>
+          </div>
+
+          <div class="card-body">
+            <!-- Краткий список упражнений (если бы они были выведены здесь) -->
+            <p class="card-text text-muted fw-bold">
+              Посмотреть детали, подходы и веса...
+            </p>
+          </div>
+
+          <div class="card-footer bg-white border-0 d-flex justify-content-between pb-3 px-3">
+            <%= link_to "Открыть", workout, class: "btn btn-outline-secondary btn-sm flex-grow-1 me-2" %>
+            <%= link_to "✏️", edit_workout_path(workout), class: "btn btn-light border-2 border-dark btn-sm" %>
+            <%= link_to "🗑️", workout, data: { turbo_method: :delete, turbo_confirm: "Удалить тренировку?" }, class: "btn btn-danger border-2 border-dark btn-sm ms-1 rounded-circle" %>
+          </div>
+          
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

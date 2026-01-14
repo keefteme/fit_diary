@@ -2,4 +2,6 @@ class FoodEntry < ApplicationRecord
   belongs_to :user
   belongs_to :product
   belongs_to :meal_type
+  
+  accepts_nested_attributes_for :product
 end

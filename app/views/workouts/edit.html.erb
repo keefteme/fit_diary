@@ -1,12 +1,12 @@
-<% content_for :title, "Editing workout" %>
+<% content_for :title, "Изменение тренировки" %>
 
-<h1>Editing workout</h1>
+<h1>Изменить тренировку</h1>
 
 <%= render "form", workout: @workout %>
 
 <br>
 
 <div>
-  <%= link_to "Show this workout", @workout %> |
-  <%= link_to "Back to workouts", workouts_path %>
+  <%= link_to "Показать эту тренировку", @workout %> |
+  <%= link_to "Назад к тренировкам", workouts_path %>
 </div>

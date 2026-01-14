@@ -12,8 +12,11 @@ class FoodEntriesController < ApplicationController
 
   # GET /food_entries/new
   def new
-    @food_entry = FoodEntry.new
-  end
+  @food_entry = FoodEntry.new
+  # Создаем "болванку" продукта, чтобы в форме появились поля для него
+  @food_entry.build_product 
+end
+
 
   # GET /food_entries/1/edit
   def edit
@@ -25,7 +28,7 @@ class FoodEntriesController < ApplicationController
 
     respond_to do |format|
       if @food_entry.save
-        format.html { redirect_to @food_entry, notice: "Food entry was successfully created." }
+        format.html { redirect_to @food_entry, notice: "Запись о приёме пищи успешно создана." }
         format.json { render :show, status: :created, location: @food_entry }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +41,7 @@ class FoodEntriesController < ApplicationController
   def update
     respond_to do |format|
       if @food_entry.update(food_entry_params)
-        format.html { redirect_to @food_entry, notice: "Food entry was successfully updated.", status: :see_other }
+        format.html { redirect_to @food_entry, notice: "Информация о приёме пищи успешно обновлена..", status: :see_other }
         format.json { render :show, status: :ok, location: @food_entry }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +55,7 @@ class FoodEntriesController < ApplicationController
     @food_entry.destroy!
 
     respond_to do |format|
-      format.html { redirect_to food_entries_path, notice: "Food entry was successfully destroyed.", status: :see_other }
+      format.html { redirect_to food_entries_path, notice: "Запись о приёме пищи успешно удалена.", status: :see_other }
       format.json { head :no_content }
     end
   end
@@ -65,6 +68,12 @@ class FoodEntriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def food_entry_params
-      params.expect(food_entry: [ :weight_grams, :date_eaten, :user_id, :product_id, :meal_type_id ])
+      params.require(:food_entry).permit(
+        :weight_grams, 
+        :date_eaten, 
+        :meal_type_id, 
+        # Разрешаем вложенные поля для продукта:
+        product_attributes: [:name, :calories, :proteins, :fats, :carbs, :food_category_id]
+      )
     end
 end

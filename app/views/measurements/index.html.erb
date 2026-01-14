@@ -1,16 +1,51 @@
-<p style="color: green"><%= notice %></p>
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="display-5 fw-bold">📉 Мой прогресс</h1>
+      <%= link_to "Добавить замер", new_measurement_path, class: "btn btn-primary" %>
+    </div>
 
-<% content_for :title, "Measurements" %>
+    <!-- Карточка с графиком или статистикой (Заглушка для красоты) -->
+    <div class="alert alert-info border-3 border-dark text-dark fw-bold mb-4" style="background: #dbeafe;">
+      💡 Последний замер был <%= @measurements.first&.date_taken&.strftime("%d.%m") || "давно" %>. 
+      <% if @measurements.any? %>
+        Текущий вес: <%= @measurements.first.weight %> кг.
+      <% end %>
+    </div>
 
-<h1>Measurements</h1>
+    <!-- Таблица -->
+    <div class="card p-0 overflow-hidden">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Вес (кг)</th>
+            <th>Талия (см)</th>
+            <th>Бедра (см)</th>
+            <th class="text-end">Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @measurements.each do |measurement| %>
+            <tr>
+              <td class="fw-bold"><%= measurement.date_taken.strftime("%d.%m.%Y") %></td>
+              <td>
+                <span class="badge bg-white text-dark border border-dark rounded-pill fs-6">
+                  <%= measurement.weight %>
+                </span>
+              </td>
+              <td><%= measurement.waist || "-" %></td>
+              <td><%= measurement.hip || "-" %></td>
+              <td class="text-end">
+                <%= link_to "Ред.", edit_measurement_path(measurement), class: "btn btn-sm btn-outline-secondary py-1 px-2" %>
+                <%= link_to "Х", measurement, data: { turbo_method: :delete, turbo_confirm: "Удалить?" }, class: "btn btn-sm btn-danger border-2 border-dark py-1 px-2 rounded-pill fw-bold" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-<div id="measurements">
-  <% @measurements.each do |measurement| %>
-    <%= render measurement %>
-    <p>
-      <%= link_to "Show this measurement", measurement %>
-    </p>
-  <% end %>
+  </div>
 </div>
-
-<%= link_to "New measurement", new_measurement_path %>

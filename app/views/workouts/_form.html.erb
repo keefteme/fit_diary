@@ -1,8 +1,7 @@
 <%= form_with(model: workout) do |form| %>
   <% if workout.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
-
+    <div class="alert alert-danger border-3 border-dark">
+      <h4>Ошибка!</h4>
       <ul>
         <% workout.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,17 +10,17 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+  <div class="card p-4">
+    <div class="mb-3">
+      <%= form.label :title, "Название тренировки", class: "fw-bold mb-2" %>
+      <%= form.text_field :title, class: "form-control form-control-lg", placeholder: "Например: День ног" %>
+    </div>
 
-  <div>
-    <%= form.label :date_performed, style: "display: block" %>
-    <%= form.date_field :date_performed %>
-  </div>
+    <div class="mb-4">
+      <%= form.label :date_performed, "Дата", class: "fw-bold mb-2" %>
+      <%= form.date_field :date_performed, class: "form-control", value: Date.today %>
+    </div>
 
-  <div>
-    <%= form.submit %>
+    <%= form.submit "Сохранить и начать", class: "btn btn-primary w-100 py-3 fw-bold fs-5" %>
   </div>
 <% end %>
