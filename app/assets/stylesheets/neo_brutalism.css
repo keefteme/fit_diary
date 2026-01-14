@@ -1,0 +1,142 @@
+/* app/assets/stylesheets/neo_brutalism.css */
+
+:root {
+  --bg-cream: #FFFEF9;
+  --neo-white: #FFFFFF;
+  --neo-black: #000000;
+  --neo-yellow: #FCD34D; /* Тот самый Golden Yellow */
+  --neo-blue: #a0c4ff;   /* Доп. цвет для акцентов */
+  --shadow-hard: 4px 4px 0px 0px #000000;
+  --border-thick: 2px solid #000000;
+  --radius-xl: 16px;
+}
+
+body {
+  background-color: var(--bg-cream) !important;
+  color: var(--neo-black);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+}
+
+/* --- КАРТОЧКИ (Cards) --- */
+.neo-card {
+  background-color: var(--neo-white);
+  border: 3px solid var(--neo-black);
+  box-shadow: var(--shadow-hard);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* --- КНОПКИ (Buttons) --- */
+.btn-neo-primary {
+  background-color: var(--neo-yellow);
+  color: var(--neo-black);
+  border: 2px solid var(--neo-black);
+  box-shadow: var(--shadow-hard);
+  border-radius: 999px; /* Pill shape */
+  font-weight: 700;
+  padding: 10px 24px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: all 0.1s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-neo-primary:hover {
+  transform: translate(2px, 2px); /* Эффект нажатия */
+  box-shadow: none; /* Тень исчезает */
+  color: black;
+}
+
+.btn-neo-secondary {
+  background-color: var(--neo-white);
+  color: var(--neo-black);
+  border: 2px solid var(--neo-black);
+  box-shadow: var(--shadow-hard);
+  border-radius: 999px;
+  font-weight: 700;
+  padding: 10px 24px;
+  transition: all 0.1s ease;
+  text-decoration: none;
+}
+
+.btn-neo-secondary:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+  background-color: #f0f0f0;
+  color: black;
+}
+
+/* --- ПОЛЯ ВВОДА (Inputs) --- */
+.form-control, .form-select {
+  border: 2px solid var(--neo-black) !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+  background-color: white !important;
+  box-shadow: none;
+  font-weight: 500;
+}
+
+.form-control:focus, .form-select:focus {
+  outline: none !important;
+  box-shadow: 4px 4px 0px 0px var(--neo-yellow) !important; /* Желтая тень при фокусе */
+  border-color: black !important;
+}
+
+/* --- ТАБЛИЦЫ (Tables) --- */
+.neo-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid black;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.neo-table th {
+  background-color: var(--neo-yellow);
+  border-bottom: 2px solid black;
+  padding: 15px;
+  text-transform: lowercase; /* Стиль заголовков */
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.neo-table td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  font-weight: 500;
+}
+
+.neo-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* --- НАВИГАЦИЯ (Navbar) --- */
+.neo-navbar {
+  background-color: var(--neo-yellow) !important;
+  border-bottom: 3px solid black;
+  padding: 1rem 0;
+  margin-bottom: 3rem;
+}
+
+.neo-nav-link {
+  color: black !important;
+  font-weight: 700;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 5px 15px;
+}
+
+.neo-nav-link:hover {
+  border: 2px solid black;
+  background: white;
+  box-shadow: 2px 2px 0 0 black;
+}

@@ -1,11 +1,15 @@
-<% content_for :title, "New food entry" %>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    
+    <h1 class="text-center mb-4">Новая запись</h1>
 
-<h1>New food entry</h1>
+    <div class="neo-card">
+      <%= render "form", food_entry: @food_entry %>
+    </div>
 
-<%= render "form", food_entry: @food_entry %>
-
-<br>
-
-<div>
-  <%= link_to "Back to food entries", food_entries_path %>
+    <div class="text-center mt-3">
+      <%= link_to "Назад к списку", food_entries_path, class: "fw-bold text-dark" %>
+    </div>
+    
+  </div>
 </div>

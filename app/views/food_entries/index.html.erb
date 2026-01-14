@@ -1,37 +1,33 @@
-<p style="color: green"><%= notice %></p>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="display-5">Дневник питания</h1>
+  <%= link_to "Добавить запись", new_food_entry_path, class: "btn-neo-primary" %>
+</div>
 
-<h1>Дневник питания</h1>
-
-<a href="<%= new_food_entry_path %>">Добавить запись</a>
-<br><br>
-
-<table border="1" cellpadding="10" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Дата</th>
-      <th>Пользователь</th>
-      <th>Прием пищи</th>
-      <th>Продукт</th>
-      <th>Вес (г)</th>
-      <th>Ккал</th>
-      <th>Действия</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @food_entries.each do |food_entry| %>
+<div class="neo-card p-0 overflow-hidden"> <!-- p-0 чтобы таблица прилипла к краям -->
+  <table class="neo-table mb-0">
+    <thead>
       <tr>
-        <td><%= food_entry.date_eaten %></td>
-        <td><%= food_entry.user.name %></td> <!-- ИМЯ, а не ID -->
-        <td><%= food_entry.meal_type.name %></td> <!-- НАЗВАНИЕ, а не ID -->
-        <td><%= food_entry.product.name %></td> <!-- НАЗВАНИЕ, а не ID -->
-        <td><%= food_entry.weight_grams %></td>
-        <!-- Расчет калорий на лету -->
-        <td><%= (food_entry.product.calories * food_entry.weight_grams / 100.0).round(1) %></td>
-        <td>
-          <%= link_to "Показать", food_entry %> | 
-          <%= link_to "Ред.", edit_food_entry_path(food_entry) %>
-        </td>
+        <th>Дата</th>
+        <th>Прием пищи</th>
+        <th>Продукт</th>
+        <th>Грамм</th>
+        <th>Ккал</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @food_entries.each do |food_entry| %>
+        <tr>
+          <td><%= food_entry.date_eaten.strftime("%d.%m") %></td>
+          <td>
+            <span class="badge bg-warning text-dark border border-dark rounded-pill">
+              <%= food_entry.meal_type.name %>
+            </span>
+          </td>
+          <td class="fw-bold"><%= food_entry.product.name %></td>
+          <td><%= food_entry.weight_grams %> г</td>
+          <td><%= (food_entry.product.calories * food_entry.weight_grams / 100.0).round(0) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

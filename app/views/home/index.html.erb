@@ -1,8 +1,18 @@
-<div class="p-5 mb-4 bg-light rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">Добро пожаловать в FitDiary!</h1>
-    <p class="col-md-8 fs-4">Это ваш персональный помощник для контроля питания и тренировок. Выберите раздел в меню сверху, чтобы начать.</p>
-    <%= link_to "Добавить еду", new_food_entry_path, class: "btn btn-primary btn-lg" %>
-    <%= link_to "Новая тренировка", new_workout_path, class: "btn btn-outline-secondary btn-lg" %>
+<div class="row justify-content-center mt-5">
+  <div class="col-md-8 text-center">
+    
+    <div class="neo-card p-5">
+      <h1 class="display-3 mb-4">fit_diary ✏️</h1>
+      <p class="fs-4 mb-5 fw-bold text-muted">
+        Твой личный, дерзкий и удобный трекер прогресса.
+        Ешь, качайся, записывай.
+      </p>
+
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <%= link_to "➕ Добавить еду", new_food_entry_path, class: "btn-neo-primary btn-lg" %>
+        <%= link_to "🏋️ Новая тренировка", new_workout_path, class: "btn-neo-secondary btn-lg" %>
+      </div>
+    </div>
+
   </div>
 </div>
