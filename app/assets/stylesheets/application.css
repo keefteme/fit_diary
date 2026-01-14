@@ -1,29 +1,134 @@
-/* Делаем все таблицы красивыми и полосатыми */
-table {
-  width: 100%;
-  margin-bottom: 1rem;
-  vertical-align: top;
-  border-color: #dee2e6;
-  border-collapse: collapse;
+/* app/assets/stylesheets/application.css */
+
+/* 1. БАЗА (Фон и шрифт) */
+:root {
+  --bg-cream: #FFFEF9;
+  --neo-yellow: #FCD34D;
+  --neo-black: #000000;
+  --shadow-hard: 4px 4px 0px 0px #000000;
 }
 
-th, td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #dee2e6;
+body {
+  background-color: var(--bg-cream) !important;
+  color: var(--neo-black) !important;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* 2. ЗАГОЛОВКИ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800 !important;
+  color: var(--neo-black) !important;
+  letter-spacing: -1px;
+}
+
+/* 3. КНОПКИ (Переопределяем Bootstrap) */
+/* Желтые кнопки (Primary, Submit) */
+.btn-primary, input[type="submit"] {
+  background-color: var(--neo-yellow) !important;
+  color: var(--neo-black) !important;
+  border: 3px solid var(--neo-black) !important;
+  box-shadow: var(--shadow-hard) !important;
+  border-radius: 50px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  padding: 10px 30px !important;
+  transition: all 0.1s ease !important;
+  cursor: pointer;
+}
+
+.btn-primary:hover, input[type="submit"]:hover {
+  transform: translate(2px, 2px) !important;
+  box-shadow: none !important;
+  background-color: #fbbf24 !important;
+}
+
+/* Белые кнопки (Secondary, ссылки-кнопки) */
+.btn-secondary, .btn-outline-secondary, .btn-light, .btn-outline-light {
+  background-color: white !important;
+  color: black !important;
+  border: 3px solid black !important;
+  box-shadow: var(--shadow-hard) !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+  padding: 10px 24px !important;
+}
+
+.btn-secondary:hover, .btn-outline-secondary:hover {
+  transform: translate(2px, 2px) !important;
+  box-shadow: none !important;
+  background-color: #f0f0f0 !important;
+}
+
+/* 4. НАВИГАЦИЯ (Меню) */
+.navbar {
+  background-color: var(--neo-yellow) !important;
+  border-bottom: 3px solid black !important;
+  padding: 15px 0 !important;
+}
+
+.navbar-brand {
+  font-weight: 900 !important;
+  color: black !important;
+  font-size: 1.5rem !important;
+  border: 2px solid black;
+  background: white;
+  padding: 5px 15px !important;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 0 black;
+}
+
+.nav-link {
+  color: black !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem;
+}
+
+/* 5. КАРТОЧКИ И КОНТЕЙНЕРЫ */
+.card, .jumbotron, .alert {
+  background-color: white !important;
+  border: 3px solid black !important;
+  box-shadow: var(--shadow-hard) !important;
+  border-radius: 16px !important;
+  margin-bottom: 20px;
+}
+
+/* 6. ПОЛЯ ВВОДА (INPUTS) */
+input.form-control, select.form-select, textarea {
+  border: 3px solid black !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+  background-color: white !important;
+  box-shadow: none !important;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+input.form-control:focus, select.form-select:focus {
+  outline: none !important;
+  box-shadow: 4px 4px 0px 0px var(--neo-yellow) !important;
+  border-color: black !important;
+}
+
+/* 7. ТАБЛИЦЫ */
+table {
+  background: white !important;
+  border: 3px solid black !important;
+  border-radius: 12px !important;
+  border-spacing: 0;
+  border-collapse: separate !important; /* Важно для скругления */
+  overflow: hidden;
+  width: 100%;
 }
 
 th {
-  background-color: #f8f9fa;
-  text-align: left;
+  background-color: var(--neo-yellow) !important;
+  border-bottom: 3px solid black !important;
+  padding: 15px !important;
+  text-transform: uppercase;
+  font-weight: 900;
 }
 
-/* Делаем заголовки аккуратнее */
-h1 {
-  margin-bottom: 20px;
-  color: #2c3e50;
-}
-
-/* Красивые ссылки-кнопки */
-a {
-  text-decoration: none;
+td {
+  padding: 15px !important;
+  border-bottom: 1px solid black !important;
 }

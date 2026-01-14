@@ -1,142 +1,120 @@
 /* app/assets/stylesheets/neo_brutalism.css */
 
+/* 1. Глобальные настройки цвета и шрифта */
 :root {
   --bg-cream: #FFFEF9;
-  --neo-white: #FFFFFF;
+  --neo-yellow: #FCD34D;
   --neo-black: #000000;
-  --neo-yellow: #FCD34D; /* Тот самый Golden Yellow */
-  --neo-blue: #a0c4ff;   /* Доп. цвет для акцентов */
   --shadow-hard: 4px 4px 0px 0px #000000;
-  --border-thick: 2px solid #000000;
-  --radius-xl: 16px;
 }
 
 body {
-  background-color: var(--bg-cream) !important;
-  color: var(--neo-black);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-cream) !important; /* Кремовый фон */
+  color: var(--neo-black) !important;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
-h1, h2, h3, h4, h5 {
-  font-weight: 800 !important;
-  letter-spacing: -0.02em;
-}
-
-/* --- КАРТОЧКИ (Cards) --- */
-.neo-card {
-  background-color: var(--neo-white);
-  border: 3px solid var(--neo-black);
-  box-shadow: var(--shadow-hard);
-  border-radius: var(--radius-xl);
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-/* --- КНОПКИ (Buttons) --- */
-.btn-neo-primary {
-  background-color: var(--neo-yellow);
-  color: var(--neo-black);
-  border: 2px solid var(--neo-black);
-  box-shadow: var(--shadow-hard);
-  border-radius: 999px; /* Pill shape */
-  font-weight: 700;
-  padding: 10px 24px;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  transition: all 0.1s ease;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.btn-neo-primary:hover {
-  transform: translate(2px, 2px); /* Эффект нажатия */
-  box-shadow: none; /* Тень исчезает */
-  color: black;
-}
-
-.btn-neo-secondary {
-  background-color: var(--neo-white);
-  color: var(--neo-black);
-  border: 2px solid var(--neo-black);
-  box-shadow: var(--shadow-hard);
-  border-radius: 999px;
-  font-weight: 700;
-  padding: 10px 24px;
-  transition: all 0.1s ease;
-  text-decoration: none;
-}
-
-.btn-neo-secondary:hover {
-  transform: translate(2px, 2px);
-  box-shadow: none;
-  background-color: #f0f0f0;
-  color: black;
-}
-
-/* --- ПОЛЯ ВВОДА (Inputs) --- */
-.form-control, .form-select {
+/* 2. Переделываем ВСЕ основные кнопки (Primary) в Желтые */
+.btn-primary, input[type="submit"] {
+  background-color: var(--neo-yellow) !important;
+  color: var(--neo-black) !important;
   border: 2px solid var(--neo-black) !important;
+  box-shadow: var(--shadow-hard) !important;
+  border-radius: 50px !important; /* Овальные кнопки */
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  padding: 10px 25px !important;
+  transition: all 0.1s ease !important;
+}
+
+/* Эффект нажатия для основных кнопок */
+.btn-primary:hover, .btn-primary:active, input[type="submit"]:hover {
+  transform: translate(2px, 2px) !important;
+  box-shadow: none !important;
+  background-color: #fbbf24 !important; /* Чуть темнее желтый */
+  border-color: black !important;
+}
+
+/* 3. Переделываем вторичные кнопки (Secondary/Outline) в Белые */
+.btn-secondary, .btn-outline-secondary, .btn-outline-light, .btn-light {
+  background-color: white !important;
+  color: black !important;
+  border: 2px solid black !important;
+  box-shadow: var(--shadow-hard) !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+}
+
+.btn-secondary:hover, .btn-outline-secondary:hover {
+  transform: translate(2px, 2px) !important;
+  box-shadow: none !important;
+  background-color: #f3f3f3 !important;
+}
+
+/* 4. Карточки и контейнеры */
+.card, .neo-card, .jumbotron {
+  background-color: white !important;
+  border: 3px solid black !important;
+  box-shadow: var(--shadow-hard) !important;
+  border-radius: 16px !important;
+}
+
+/* 5. Поля ввода (Inputs) */
+input.form-control, select.form-select, input[type="text"], input[type="number"], input[type="email"], input[type="password"], textarea {
+  border: 2px solid black !important;
   border-radius: 12px !important;
   padding: 12px !important;
   background-color: white !important;
   box-shadow: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.form-control:focus, .form-select:focus {
-  outline: none !important;
-  box-shadow: 4px 4px 0px 0px var(--neo-yellow) !important; /* Желтая тень при фокусе */
+input.form-control:focus, select.form-select:focus {
+  box-shadow: 4px 4px 0px 0px var(--neo-yellow) !important;
   border-color: black !important;
+  outline: none !important;
 }
 
-/* --- ТАБЛИЦЫ (Tables) --- */
-.neo-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 2px solid black;
-  border-radius: 12px;
-  overflow: hidden;
-  background: white;
-}
-
-.neo-table th {
-  background-color: var(--neo-yellow);
-  border-bottom: 2px solid black;
-  padding: 15px;
-  text-transform: lowercase; /* Стиль заголовков */
-  font-weight: 800;
-  font-size: 1.1rem;
-}
-
-.neo-table td {
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-  font-weight: 500;
-}
-
-.neo-table tr:last-child td {
-  border-bottom: none;
-}
-
-/* --- НАВИГАЦИЯ (Navbar) --- */
-.neo-navbar {
+/* 6. Навигация (Меню) */
+.navbar {
   background-color: var(--neo-yellow) !important;
-  border-bottom: 3px solid black;
-  padding: 1rem 0;
-  margin-bottom: 3rem;
+  border-bottom: 3px solid black !important;
+  box-shadow: 0px 4px 0px 0px rgba(0,0,0,0.1);
 }
 
-.neo-nav-link {
+.navbar a.nav-link {
   color: black !important;
-  font-weight: 700;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  padding: 5px 15px;
+  font-weight: 800 !important;
 }
 
-.neo-nav-link:hover {
-  border: 2px solid black;
-  background: white;
-  box-shadow: 2px 2px 0 0 black;
+/* 7. Таблицы */
+table {
+  background: white !important;
+  border: 2px solid black !important;
+  border-radius: 12px !important;
+  overflow: hidden; /* Чтобы скругление работало */
+  border-collapse: separate !important; /* Нужно для border-radius */
+  border-spacing: 0;
+}
+
+th {
+  background-color: var(--neo-yellow) !important;
+  color: black !important;
+  border-bottom: 2px solid black !important;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+td {
+  border-bottom: 1px solid black !important;
+}
+
+/* Ссылки внутри текста */
+a {
+  color: black;
+  text-decoration-thickness: 2px;
+}
+a:hover {
+  background-color: var(--neo-yellow);
+  color: black;
 }
