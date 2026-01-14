@@ -10,12 +10,6 @@
     </div>
   <% end %>
 
-  <!-- Выбор пользователя -->
-  <div>
-    <%= form.label :user_id, "Пользователь", style: "display: block" %>
-    <%= form.collection_select :user_id, User.all, :id, :name %>
-  </div>
-
   <!-- Выбор продукта (вместо ввода ID) -->
   <div>
     <%= form.label :product_id, "Продукт", style: "display: block" %>

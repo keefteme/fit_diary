@@ -3,7 +3,7 @@ class FoodEntriesController < ApplicationController
 
   # GET /food_entries or /food_entries.json
   def index
-    @food_entries = FoodEntry.all
+    @food_entries = current_user.food_entries.order(date_eaten: :desc)
   end
 
   # GET /food_entries/1 or /food_entries/1.json
@@ -21,7 +21,7 @@ class FoodEntriesController < ApplicationController
 
   # POST /food_entries or /food_entries.json
   def create
-    @food_entry = FoodEntry.new(food_entry_params)
+    @food_entry = current_user.food_entries.build(food_entry_params)
 
     respond_to do |format|
       if @food_entry.save

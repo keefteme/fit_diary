@@ -23,9 +23,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
+            <% if user_signed_in? %>
             <li class="nav-item"><%= link_to "Питание", food_entries_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "Тренировки", workouts_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "Мой вес", measurements_path, class: "nav-link" %></li>
+
+            <li class="nav-item ms-3">
+              <%= link_to "Выйти (#{current_user.email})", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-light btn-sm mt-1" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Войти", new_user_session_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Регистрация", new_user_registration_path, class: "btn btn-light text-primary ms-2 btn-sm mt-1" %>
+            </li>
+          <% end %>
           </ul>
         </div>
       </div>

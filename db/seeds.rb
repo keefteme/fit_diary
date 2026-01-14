@@ -28,5 +28,10 @@ Exercise.create(name: "Жим штанги лежа", description: "Базово
 Exercise.create(name: "Приседания", description: "Со штангой на плечах", muscle_group: legs)
 Exercise.create(name: "Подтягивания", description: "Широким хватом", muscle_group: back)
 
-# Тестовый пользователь
-User.create(name: "Студент", email: "student@example.com", height: 180)
+User.create!(
+  email: "student@example.com",
+  password: "password123", 
+  password_confirmation: "password123",
+  name: "Студент"
+)
+
