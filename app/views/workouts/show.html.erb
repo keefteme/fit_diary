@@ -19,10 +19,10 @@
   <%= form_with(model: [@workout, WorkoutItem.new], local: true, class: "row g-3") do |f| %>
     <div class="col-md-8">
       <!-- Группируем по мышцам -->
-      <%= f.select :exercise_id, 
-          option_groups_from_collection_for_select(MuscleGroup.all, :exercises, :name, :id, :name), 
-          { prompt: "Выберите упражнение..." }, 
-          { class: "form-select form-select-lg fw-bold" } 
+      <%= f.grouped_collection_select :exercise_id, 
+          MuscleGroup.all, :exercises, :name, :id, :name,
+          { prompt: "Выберите упражнение..." },
+          { class: "form-select form-select-lg fw-bold border-2 border-dark" } 
       %>
     </div>
     <div class="col-md-4">
