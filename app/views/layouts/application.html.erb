@@ -38,11 +38,12 @@
                 <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light border-2 border-dark fw-bold rounded-pill px-4 shadow-sm" %>
               </li>
             <% else %>
-              <li class="nav-item">
-                <%= link_to "Войти", new_user_session_path, class: "btn-neo-secondary" %>
+              <li class="nav-item d-flex align-items-center">
+                <%= link_to "Войти", new_user_session_path, 
+                  class: "btn btn-outline-dark border-2 fw-bold rounded-pill px-4 me-2" %>
               </li>
-              <li class="nav-item">
-                <%= link_to "Регистрация", new_user_registration_path, class: "btn-neo-primary" %>
+              <%= link_to "Регистрация", new_user_registration_path, 
+                  class: "btn btn-light border-2 border-dark fw-bold rounded-pill px-4 shadow-sm" %>
               </li>
             <% end %>
           </ul>
