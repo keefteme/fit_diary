@@ -11,6 +11,8 @@
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
   </head>
 
     <body class="d-flex flex-column min-vh-100">
@@ -32,8 +34,8 @@
               <li class="nav-item"><%= link_to "Тренировки", workouts_path, class: "nav-link neo-nav-link" %></li>
               <li class="nav-item"><%= link_to "Вес", measurements_path, class: "nav-link neo-nav-link" %></li>
               
-              <li class="nav-item ms-3">
-                <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-neo-secondary py-1 px-3 fs-6" %>
+              <li class="nav-item ms-3 d-flex align-items-center">
+                <%= link_to "Выйти", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-light border-2 border-dark fw-bold rounded-pill px-4 shadow-sm" %>
               </li>
             <% else %>
               <li class="nav-item">
