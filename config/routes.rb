@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   resources :products
   resources :meal_types
   resources :food_categories
-  resources :workout_items
-  resources :workouts
+  resources :workout_items, only: [] do
+    resources :workout_sets, only: [:create, :destroy]
+  end
+  resources :workouts do
+    resources :workout_items, only: [:create, :destroy]
+  end
   resources :exercises
   resources :muscle_groups
   resources :measurements

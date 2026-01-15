@@ -1,34 +1,97 @@
-<div class="mb-4">
-  <%= link_to "← Все тренировки", workouts_path, class: "fw-bold text-dark text-decoration-none" %>
-</div>
-
-<div class="row">
-  <div class="col-lg-8">
-    
-    <!-- Заголовок тренировки -->
-    <div class="card p-4 mb-4 bg-warning">
-      <h1 class="display-6 fw-bold mb-0"><%= @workout.title %></h1>
-      <p class="fw-bold opacity-75 mb-0">Дата: <%= @workout.date_performed.strftime("%d.%m.%Y") %></p>
-    </div>
-
-    <!-- Здесь должен быть список упражнений (WorkoutItems) -->
-    <!-- Так как мы пока не настраивали детальный вывод упражнений, сделаем заглушку в стиле -->
-    
-    <div class="card p-5 text-center dashed-border" style="border-style: dashed !important;">
-      <h3 class="text-muted">Список упражнений</h3>
-      <p>Здесь будут подходы, повторения и веса.</p>
-      
-      <!-- Это место для будущего функционала "Добавить упражнение" -->
-      <button class="btn btn-secondary disabled">Функционал в разработке</button>
-    </div>
-
-  </div>
-
-  <div class="col-lg-4">
-    <div class="card p-3">
-      <h5 class="fw-bold">Действия</h5>
-      <%= link_to "Редактировать название", edit_workout_path(@workout), class: "btn btn-outline-secondary w-100 mb-2" %>
-      <%= link_to "Удалить тренировку", @workout, data: { turbo_method: :delete, turbo_confirm: "Точно?" }, class: "btn btn-danger w-100 border-2 border-dark" %>
-    </div>
+<div class="mb-4 d-flex justify-content-between align-items-center">
+  <%= link_to "← Все тренировки", workouts_path, class: "fw-bold text-dark text-decoration-none fs-5" %>
+  <div>
+    <%= link_to "Ред. название", edit_workout_path(@workout), class: "btn btn-outline-secondary btn-sm me-2" %>
+    <%= link_to "Удалить", @workout, data: { turbo_method: :delete, turbo_confirm: "Удалить тренировку?" }, class: "btn btn-danger btn-sm border-2 border-dark" %>
   </div>
 </div>
+
+<!-- ШАПКА ТРЕНИРОВКИ -->
+<div class="card p-4 mb-5 bg-warning shadow-hard">
+  <h1 class="display-4 fw-black text-uppercase mb-0"><%= @workout.title %></h1>
+  <p class="fs-5 fw-bold opacity-75 mb-0">📅 <%= @workout.date_performed.strftime("%d %B %Y") %></p>
+</div>
+
+<!-- ФОРМА ДОБАВЛЕНИЯ УПРАЖНЕНИЯ -->
+<div class="card p-4 mb-5" style="border-style: dashed !important;">
+  <h4 class="fw-bold mb-3">➕ Добавить упражнение</h4>
+  
+  <%= form_with(model: [@workout, WorkoutItem.new], local: true, class: "row g-3") do |f| %>
+    <div class="col-md-8">
+      <!-- Группируем по мышцам -->
+      <%= f.select :exercise_id, 
+          option_groups_from_collection_for_select(MuscleGroup.all, :exercises, :name, :id, :name), 
+          { prompt: "Выберите упражнение..." }, 
+          { class: "form-select form-select-lg fw-bold" } 
+      %>
+    </div>
+    <div class="col-md-4">
+      <%= f.submit "Добавить", class: "btn btn-dark w-100 h-100 fw-bold fs-5 rounded-pill" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- СПИСОК УПРАЖНЕНИЙ -->
+<% if @workout.workout_items.any? %>
+  <div class="row">
+    <% @workout.workout_items.each do |item| %>
+      <div class="col-md-6 mb-4">
+        
+        <!-- КАРТОЧКА УПРАЖНЕНИЯ -->
+        <div class="card h-100 border-3 border-dark shadow-sm">
+          
+          <!-- Заголовок карточки -->
+          <div class="card-header bg-white border-bottom-2 border-dark d-flex justify-content-between align-items-center py-3">
+            <h5 class="fw-bold m-0"><%= item.exercise.name %></h5>
+            <%= link_to "Х", workout_workout_item_path(@workout, item), data: { turbo_method: :delete, turbo_confirm: "Убрать упражнение?" }, class: "text-danger fw-bold text-decoration-none fs-5" %>
+          </div>
+
+          <div class="card-body bg-light">
+            
+            <!-- Таблица подходов -->
+            <% if item.workout_sets.any? %>
+              <table class="table table-sm border-dark mb-3" style="background: transparent !important;">
+                <thead>
+                  <tr>
+                    <th>Кг</th>
+                    <th>Повт</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% item.workout_sets.each do |set| %>
+                    <tr>
+                      <td class="fw-bold fs-5"><%= set.weight %></td>
+                      <td class="fw-bold fs-5"><%= set.reps %></td>
+                      <td class="text-end">
+                        <%= link_to "×", workout_item_workout_set_path(item, set), data: { turbo_method: :delete }, class: "text-muted text-decoration-none" %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              <p class="text-muted small text-center mb-3">Нет подходов</p>
+            <% end %>
+
+            <!-- Форма добавления подхода (Inline) -->
+            <div class="mt-3 pt-3 border-top border-dark border-1">
+              <%= form_with(model: [item, WorkoutSet.new], local: true, class: "d-flex gap-2") do |s| %>
+                <%= s.number_field :weight, step: 0.5, placeholder: "Вес", class: "form-control form-control-sm border-2 border-dark fw-bold" %>
+                <%= s.number_field :reps, placeholder: "Повт", class: "form-control form-control-sm border-2 border-dark fw-bold" %>
+                <%= s.submit "ОК", class: "btn btn-primary btn-sm border-2 border-dark fw-bold" %>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center text-muted py-5">
+    <h3>Список пуст 🦗</h3>
+    <p>Добавьте упражнение сверху.</p>
+  </div>
+<% end %>
